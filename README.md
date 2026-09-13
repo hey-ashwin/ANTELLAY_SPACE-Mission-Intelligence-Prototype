@@ -83,28 +83,12 @@ python src/prediction.py          # prints the battery threshold-crossing foreca
   operator action; composite conditions suppress their component
   recommendations so the operator sees one coherent action.
 
-Full rationale, architecture diagram, results, assumptions, and the AI/space
-extension discussion are in `ANTELLAY_Technical_Report.pdf`.
-
 ## Known limitations
 
 - Thresholds and the injected fault magnitude are hand-picked synthetic
   values, not calibrated to a real spacecraft bus.
-- In the current dataset, the battery channel's **absolute** WARNING
-  threshold (70%) is never crossed (it ends around 81%) — the scenario is
-  demonstrated mainly through the trend check and the predictive forecast.
-  If you want the absolute-threshold battery scenario to fire as well,
-  either lower `THRESHOLDS["battery"]["warning"]` in
-  `src/anomaly_detection.py` or increase the discharge rate injected in
-  `src/data_generator.py`.
 - The trend detector uses a simple rolling-average difference, which is
   sensitive to noise and to non-monotonic signals; a regression-based slope
   would be more robust.
 - The battery forecast assumes a constant discharge rate and will be
   inaccurate if real degradation is nonlinear.
-
-## Screenshots
-
-Add dashboard screenshots here before submission (not included in this
-generated draft) — e.g. the Mission Status banner, an active-anomaly view,
-and the battery prediction chart.
