@@ -16,7 +16,7 @@ actions.
 ├── app.py                     # Streamlit dashboard (entry point)
 ├── requirements.txt
 ├── data/
-│   └── telemetry.csv          # generated synthetic dataset (not committed; see below)
+│   └── telemetry.csv          # generated synthetic dataset
 └── src/
     ├── __init__.py
     ├── data_generator.py      # creates the synthetic telemetry dataset
