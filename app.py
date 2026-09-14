@@ -52,9 +52,8 @@ elif any(anomaly["severity"] == "WARNING" for anomaly in anomalies):
 else:
     st.success("🟢 NORMAL — No active anomalies detected")
 
-st.write("Satellite telemetry monitoring prototype")
-
-st.dataframe(df)
+with st.expander("View Raw Telemetry"):
+    st.dataframe(df)
 
 st.subheader("Latest Telemetry")
 
@@ -154,6 +153,14 @@ if battery_prediction["minutes_remaining"] is None:
     )
 
 else:
+    # Forecast slightly beyond the predicted critical threshold crossing.
+    forecast_minutes = int(battery_prediction["minutes_remaining"]) + 60
+
+    battery_forecast = get_battery_prediction_series(
+        df,
+        forecast_minutes=forecast_minutes
+    )
+
     col1, col2 = st.columns(2)
 
     with col1:
